@@ -39,6 +39,19 @@ class CommentsSection extends React.Component {
     }
   };
 
+  checkRating = (rating) => {
+    switch (rating) {
+      case 1:
+        return "badge-danger py-2 px-3 rounded text-left";
+      case 2:
+        return "badge-danger py-2 px-3 rounded text-left";
+      case 3:
+        return "badge-warning py-2 px-3 rounded text-left";
+      default:
+        return "badge-success py-2 px-3 rounded text-left";
+    }
+  };
+
   render() {
     return (
       <Row>
@@ -52,18 +65,18 @@ class CommentsSection extends React.Component {
 
             {this.state.data.length > 0 ? (
               this.state.data.map((e, index) => (
-                <Alert key={index} variant="dark">
-                  <div className="d-block">
-                    <p className="font-weight-bold d-inline-block">BookID:</p>
-                    <span> {e.elementId}</span>
-                  </div>
+                <Alert key={index} variant="dark" className="rounded">
                   <div className="d-flex justify-content-between align-items-center">
-                    <span>
-                      <span className="font-weight-bold">Comment:</span> {e.comment}
+                    <span className="w-75">
+                      <Alert variant="light" className=" font-weight-bold rounded mb-0">
+                        Comment: <span className="font-weight-normal">{e.comment}</span>
+                      </Alert>
                     </span>
-                    <p className="badge badge-primary py-2 px-3 my-0">
-                      Rating:<span className="ml-2"> {e.rate}</span> / 5
-                    </p>
+                    <div className={this.checkRating(e.rate)}>
+                      {[...Array(e.rate)].map((e) => (
+                        <i class="fas fa-star"></i>
+                      ))}
+                    </div>
                   </div>
                 </Alert>
               ))
