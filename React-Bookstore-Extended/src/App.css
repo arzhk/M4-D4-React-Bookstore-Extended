@@ -51,6 +51,17 @@ section {
   border-bottom: 4px solid #0d87d4 !important;
 }
 
+.btn-addtocart {
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out 0.05s;
+}
+
+.card:hover .btn-addtocart {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
 .card-img {
   height: 200px;
   border-radius: 4px 4px 0px 0px !important;
@@ -69,12 +80,20 @@ section {
   border: none;
 }
 
-.card-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 small {
   color: rgb(41, 41, 41);
+}
+
+.comments-image img {
+  max-width: 300px;
+}
+
+.h5 {
+  font-size: 0.9rem;
+}
+
+.price-info {
+  font-size: 1.2rem;
+  padding-bottom: 6px;
+  color: rgb(80, 124, 62);
 }

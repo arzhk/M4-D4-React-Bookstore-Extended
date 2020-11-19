@@ -9,6 +9,7 @@ export default class BookList extends React.Component {
     books: Fantasy,
     isFiltered: false,
     selectedBookID: null,
+    selectedBookImage: null,
   };
 
   filterBooks = (filterQuery) => {
@@ -19,14 +20,20 @@ export default class BookList extends React.Component {
       this.setState({ books: Fantasy, isFiltered: false });
     }
   };
-  selectBook = (id) => {
-    this.setState({ selectedBookID: id });
+  selectBook = (id, imageUrl) => {
+    this.setState({ selectedBookID: id, selectedBookImage: imageUrl });
   };
 
   render() {
     return (
       <Container>
-        {this.state.selectedBookID && <CommentsSection selectedBookID={this.state.selectedBookID} isLoading={true} />}
+        {this.state.selectedBookID && (
+          <CommentsSection
+            selectedBookID={this.state.selectedBookID}
+            selectedBookImage={this.state.selectedBookImage}
+            isLoading={true}
+          />
+        )}
         <Row className="mb-4">
           <Col xs={6}>
             <h5>Filter Books</h5>
@@ -49,7 +56,7 @@ export default class BookList extends React.Component {
         </Row>
         <Row>
           {this.state.books.map((e, index) => (
-            <Col key={index} className="mb-4" xs={4}>
+            <Col key={index} className="mb-4" xs={3}>
               <SingleBook book={e} selectBook={this.selectBook} isSelected={this.state.selectedBookID === e.asin} />
             </Col>
           ))}
