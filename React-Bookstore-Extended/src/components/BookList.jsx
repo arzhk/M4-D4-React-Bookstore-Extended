@@ -26,7 +26,7 @@ export default class BookList extends React.Component {
   render() {
     return (
       <Container>
-        {this.state.selectedBookID && <CommentsSection selectedBookID={this.state.selectedBookID} />}
+        {this.state.selectedBookID && <CommentsSection selectedBookID={this.state.selectedBookID} isLoading={true} />}
         <Row className="mb-4">
           <Col xs={6}>
             <h5>Filter Books</h5>

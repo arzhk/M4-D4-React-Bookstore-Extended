@@ -16,7 +16,7 @@ class SingleBook extends React.Component {
     const { book, selectBook, isSelected } = this.props;
 
     return (
-      <Card className={isSelected ? "test" : ""} onClick={() => selectBook(book.asin)}>
+      <Card className={isSelected ? "selected" : ""} onClick={() => selectBook(book.asin)}>
         <div className="card-img" style={{ background: `url(${book.img})` }} alt="book-img"></div>
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
