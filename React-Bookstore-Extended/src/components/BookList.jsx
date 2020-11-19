@@ -1,16 +1,17 @@
 import React from "react";
 import { Container, Row, Col, FormControl } from "react-bootstrap";
-import SingleBook from "../SingleBook/SingleBook";
-import Fantasy from "../../data/fantasy.json";
+import CommentsSection from "./CommentsSection";
+import SingleBook from "./SingleBook";
+import Fantasy from "../data/fantasy.json";
 
 export default class BookList extends React.Component {
   state = {
     books: Fantasy,
     isFiltered: false,
+    selectedBookID: null,
   };
 
   filterBooks = (filterQuery) => {
-    let bookSet = this.state.books;
     if (filterQuery.length > 0) {
       let filteredBooks = Fantasy.filter((e) => e.title.toLowerCase().includes(filterQuery.toLowerCase()));
       this.setState({ books: filteredBooks, isFiltered: true });
@@ -18,10 +19,14 @@ export default class BookList extends React.Component {
       this.setState({ books: Fantasy, isFiltered: false });
     }
   };
+  selectBook = (id) => {
+    this.setState({ selectedBookID: id });
+  };
 
   render() {
     return (
       <Container>
+        {this.state.selectedBookID && <CommentsSection selectedBookID={this.state.selectedBookID} />}
         <Row className="mb-4">
           <Col xs={6}>
             <h5>Filter Books</h5>
@@ -43,9 +48,9 @@ export default class BookList extends React.Component {
           </Col>
         </Row>
         <Row>
-          {this.state.books.map((e) => (
-            <Col className="mb-4" xs={4}>
-              <SingleBook book={e} />
+          {this.state.books.map((e, index) => (
+            <Col key={index} className="mb-4" xs={4}>
+              <SingleBook book={e} selectBook={this.selectBook} isSelected={this.state.selectedBookID === e.asin} />
             </Col>
           ))}
         </Row>

@@ -5,25 +5,25 @@ class SingleBook extends React.Component {
   state = {
     selected: false,
     className: null,
+    bookID: null,
   };
 
-  toggleSelected = () => {
-    this.setState({
-      selected: this.state.selected === false ? true : false,
-    });
+  componentDidMount = () => {
+    this.setState({ bookID: this.props.book.asin });
   };
 
   render() {
-    const { book } = this.props;
-    const isSelected = this.state.selected;
+    const { book, selectBook, isSelected } = this.props;
+
     return (
-      <Card className={isSelected ? "test" : null} onClick={() => this.toggleSelected()}>
+      <Card className={isSelected ? "test" : ""} onClick={() => selectBook(book.asin)}>
         <div className="card-img" style={{ background: `url(${book.img})` }} alt="book-img"></div>
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
           <Card.Text>{book.category}</Card.Text>
           <Card.Text className="font-weight-bold">£{book.price}</Card.Text>
           <Button variant="primary">Buy Now</Button>
+          <small className="text-right w-100 d-block">{book.asin}</small>
         </Card.Body>
       </Card>
     );
