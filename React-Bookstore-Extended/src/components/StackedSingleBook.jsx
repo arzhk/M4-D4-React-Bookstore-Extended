@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 
-class SingleBook extends React.Component {
+class StackedSingleBook extends React.Component {
   state = {
     selected: false,
     className: null,
@@ -17,7 +17,7 @@ class SingleBook extends React.Component {
     const { book, selectBook, isSelected } = this.props;
 
     return (
-      <Card className={isSelected ? "selected" : ""} onClick={() => selectBook(book.asin, book.img)}>
+      <Card className={isSelected ? "selected w-100" : ""} onClick={() => selectBook(book.asin, book.img)}>
         <div className="card-img" style={{ background: `url(${book.img})` }} alt="book-img"></div>
         <Card.Body className="d-flex flex-column justify-content-between px-3 py-2">
           <div className="mb-4">
@@ -40,4 +40,4 @@ class SingleBook extends React.Component {
   }
 }
 
-export default SingleBook;
+export default StackedSingleBook;

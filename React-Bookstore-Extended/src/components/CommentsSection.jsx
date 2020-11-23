@@ -21,8 +21,10 @@ class CommentsSection extends React.Component {
         },
       });
       const data = await response.json();
-      this.setState({ data });
-      this.setState({ isLoading: false });
+      setTimeout(() => {
+        this.setState({ isLoading: false });
+        this.setState({ data });
+      }, 500);
     } catch (error) {
       console.error(`API ERROR : ${error.message}`);
     }
@@ -35,6 +37,8 @@ class CommentsSection extends React.Component {
   componentDidUpdate = (prevProps) => {
     if (prevProps.selectedBookID !== this.props.selectedBookID) {
       this.fetchCommentsHandler(this.props.selectedBookID);
+      this.setState({ selectedBookImage: this.props.selectedBookImage });
+      console.log(this.state.selectedBookImage);
     }
   };
 
@@ -56,33 +60,41 @@ class CommentsSection extends React.Component {
       <Row>
         <Col>
           <div>
-            <h2>Comments</h2>
+            <h2 className="d-block">Comments</h2>
             <Alert variant="dark" className="d-flex justify-content-start align-items-start mb-5 py-3 px-3 rounded-lg">
               <div className={this.state.isLoading ? "d-block w-100" : "d-none"}>
                 <p className="d-inline-block mb-0 mr-2">Loading...</p>
                 <Spinner size="sm" animation="border" variant="primary" disabled />
               </div>
               <div className="comments-image">
-                <img className="rounded-lg" src={this.props.selectedBookImage} alt="book-comments" />
+                {!this.state.isLoading && (
+                  <img className="rounded-lg" src={this.state.selectedBookImage} alt="book-comments" />
+                )}
               </div>
               <div className="d-flex flex-column w-100 px-4">
-                {this.state.data.length > 0 ? (
-                  this.state.data.map((e, index) => (
-                    <div className="rounded w-100 mb-3">
-                      <div className="d-flex justify-content-start align-items-center">
-                        <span className="w-75 mr-3">
-                          <Alert variant="light" className=" font-weight-bold rounded mb-0">
-                            <span className="font-weight-normal">"{e.comment}"</span>
-                          </Alert>
-                        </span>
-                        <div className={this.checkRating(e.rate)}>
-                          {[...Array(e.rate)].map((e) => (
-                            <i class="fas fa-star px-1"></i>
-                          ))}
+                {!this.state.isLoading ? (
+                  this.state.data.length > 0 ? (
+                    this.state.data.map((e, index) => (
+                      <div key={index} className="rounded w-100 mb-3">
+                        <div className="d-flex justify-content-start align-items-center">
+                          <span className="w-75 mr-3">
+                            <Alert variant="light" className=" font-weight-bold rounded mb-0">
+                              <span className="font-weight-normal">"{e.comment}"</span>
+                            </Alert>
+                          </span>
+                          <div className={this.checkRating(e.rate)}>
+                            {[...Array(e.rate)].map((e, index) => (
+                              <i key={index} className="fas fa-star px-1"></i>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    ))
+                  ) : (
+                    <Alert variant="danger" className={this.state.isLoading ? "d-none" : "d-block"}>
+                      No Comments Found
+                    </Alert>
+                  )
                 ) : (
                   <Alert variant="danger" className={this.state.isLoading ? "d-none" : "d-block"}>
                     No Comments Found
