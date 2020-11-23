@@ -56,3 +56,18 @@ EXTRA
 
 Add to "CommentList" component the capability to filter comments using a text box. The Filter will display only
 comments that contains as comment or as author the specified string
+
+M4-D6 TASKS
+
+StriveBooks App
+
+Make sure to refactor the grid of the books list to have the list on the
+left and the CommentsArea always visible on the right.
+
+Create the initial state for the CommentsArea for when there's no data
+to be displayed.
+
+The CommentsArea behaviour: every time the user clicks on a card a fetch
+should be perfomed and comments should update. Pass the single ID
+property and let the Component handle the fetch by using
+componentDidUpdate method.
