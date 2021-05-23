@@ -38,7 +38,6 @@ class CommentsSection extends React.Component {
     if (prevProps.selectedBookID !== this.props.selectedBookID) {
       this.fetchCommentsHandler(this.props.selectedBookID);
       this.setState({ selectedBookImage: this.props.selectedBookImage });
-      console.log(this.state.selectedBookImage);
     }
   };
 

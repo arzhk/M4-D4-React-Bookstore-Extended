@@ -26,7 +26,7 @@ export default class StackedBookList extends React.Component {
 
   render() {
     return (
-      <div className="px-5 ml-5 w-100">
+      <div className="pl-3 w-100">
         <Row className="mb-4">
           <Col xs={3}>
             <h2>Filter Books</h2>
@@ -34,7 +34,7 @@ export default class StackedBookList extends React.Component {
               placeholder="Filter books by title..."
               aria-label="Username"
               aria-describedby="basic-addon1"
-              className="mb-3"
+              className="mb-4"
               onChange={(e) => this.filterBooks(e.target.value)}
             />
             <p

@@ -1,13 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 import WarningSign from "./components/WarningSign";
 import MyBadge from "./components/MyBadge";
 import BookList from "./components/BookList";
 import NavBar from "./components/NavBar";
 import StackedBookList from "./components/StackedBookList";
+import JumboBanner from "./components/JumboBanner";
 
 class App extends React.Component {
   state = {
@@ -25,11 +26,14 @@ class App extends React.Component {
       <>
         <NavBar changeMode={this.modeHandler} />
         <WarningSign text="Wow, prop text, react is amazing!" subText="This is some subtext" />
-        <MyBadge color="primary" text="Wow, amazing!" />
-        <Row>
-          {this.state.mode === "default" ? <BookList /> : ""}
-          {this.state.mode === "stacked" && <StackedBookList />}
-        </Row>
+        <JumboBanner />
+        <Container>
+          <MyBadge color="primary" text="Wow, amazing!" />
+          <Row>
+            {this.state.mode === "default" ? <BookList /> : ""}
+            {this.state.mode === "stacked" && <StackedBookList />}
+          </Row>
+        </Container>
       </>
     );
   }

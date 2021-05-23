@@ -36,7 +36,7 @@ export default class BookList extends React.Component {
         )}
         <Row className="mb-4">
           <Col xs={6}>
-            <h5>Filter Books</h5>
+            <h2>Filter Books</h2>
             <FormControl
               placeholder="Filter books by title..."
               aria-label="Username"
